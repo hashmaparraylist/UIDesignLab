@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  UIDesignLab
 //
-//  Created by 瞿盛 on 15/6/7.
+//  Created by Sebastian Qu on 15/6/7.
 //  Copyright (c) 2015年 Sebastian Qu. All rights reserved.
 //
 
