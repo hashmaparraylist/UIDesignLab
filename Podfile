@@ -3,7 +3,7 @@ platform :ios, '8.0'
 
 target 'UIDesignLab' do
 pod 'AFNetworking', '~> 2.5.3'
-pod 'pop', '~> 1.0.7'
+pod 'pop', :git => 'https://github.com/facebook/pop.git' 
 end
 
 target 'UIDesignLabTests' do

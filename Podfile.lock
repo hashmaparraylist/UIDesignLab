@@ -24,7 +24,16 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.3)
-  - pop (~> 1.0.7)
+  - pop (from `https://github.com/facebook/pop.git`)
+
+EXTERNAL SOURCES:
+  pop:
+    :git: https://github.com/facebook/pop.git
+
+CHECKOUT OPTIONS:
+  pop:
+    :commit: 038f29b2de47db3fce803c5a180eee604ebe1977
+    :git: https://github.com/facebook/pop.git
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e

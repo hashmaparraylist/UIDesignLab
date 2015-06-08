@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -15,11 +15,74 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="twY-rE-S6t">
+                                <rect key="frame" x="235" y="70" width="130" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="lTV-1C-Hhd"/>
+                                </constraints>
+                                <inset key="titleEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                <state key="normal" title="侧边毛玻璃导航"/>
+                                <connections>
+                                    <segue destination="UFy-iE-Ub1" kind="show" identifier="sliderMenu" id="Mk4-2Y-Shg"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="twY-rE-S6t" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="50" id="GNH-EC-68K"/>
+                            <constraint firstAttribute="centerX" secondItem="twY-rE-S6t" secondAttribute="centerX" id="X7l-OI-WWX"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="tqV-UT-bmE"/>
+                    <connections>
+                        <outlet property="demoOne" destination="twY-rE-S6t" id="JKa-rm-tVI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1306" y="438"/>
+        </scene>
+        <!--侧边毛玻璃-->
+        <scene sceneID="FWJ-2e-Tot">
+            <objects>
+                <viewController id="QNd-ii-ywb" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TzS-Gm-oxQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="0tE-Kb-JBA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ase-qf-0Wy">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="侧边毛玻璃" id="Nnz-Gn-pVW">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="add" id="oDe-tH-GCu"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="TWI-7K-z1A"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OyZ-zA-QE8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2927" y="438"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="lLo-6a-hPx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UFy-iE-Ub1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="uTB-yB-Cp9"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bNb-r9-hdh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="QNd-ii-ywb" kind="relationship" relationship="rootViewController" id="2VX-zu-lZA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KoQ-sW-h46" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2115" y="438"/>
         </scene>
     </scenes>
 </document>
