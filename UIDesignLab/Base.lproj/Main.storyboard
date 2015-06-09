@@ -46,7 +46,7 @@
         <!--侧边毛玻璃-->
         <scene sceneID="FWJ-2e-Tot">
             <objects>
-                <viewController id="QNd-ii-ywb" sceneMemberID="viewController">
+                <viewController id="QNd-ii-ywb" customClass="SliderMenuViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TzS-Gm-oxQ"/>
                         <viewControllerLayoutGuide type="bottom" id="0tE-Kb-JBA"/>
@@ -54,7 +54,22 @@
                     <view key="view" contentMode="scaleToFill" id="ase-qf-0Wy">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUk-oj-pCI">
+                                <rect key="frame" x="285" y="133" width="30" height="30"/>
+                                <state key="normal" title="关闭">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="close:" destination="QNd-ii-ywb" eventType="touchUpInside" id="yi3-qd-vp0"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UUk-oj-pCI" firstAttribute="top" secondItem="TzS-Gm-oxQ" secondAttribute="bottom" constant="69" id="gzv-Qz-pnb"/>
+                            <constraint firstAttribute="centerX" secondItem="UUk-oj-pCI" secondAttribute="centerX" id="wzZ-mT-4EY"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="侧边毛玻璃" id="Nnz-Gn-pVW">
                         <barButtonItem key="leftBarButtonItem" style="done" systemItem="add" id="oDe-tH-GCu"/>

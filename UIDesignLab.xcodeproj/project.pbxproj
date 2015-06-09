@@ -15,6 +15,7 @@
 		821B2E701B24852B00EDBB2F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 821B2E6F1B24852B00EDBB2F /* Images.xcassets */; };
 		821B2E731B24852B00EDBB2F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 821B2E711B24852B00EDBB2F /* LaunchScreen.xib */; };
 		821B2E7F1B24852B00EDBB2F /* UIDesignLabTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 821B2E7E1B24852B00EDBB2F /* UIDesignLabTests.m */; };
+		82F5B6A31B27381B007B258E /* SliderMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F5B6A21B27381B007B258E /* SliderMenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,15 +36,17 @@
 		821B2E631B24852B00EDBB2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		821B2E641B24852B00EDBB2F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		821B2E661B24852B00EDBB2F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		821B2E671B24852B00EDBB2F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		821B2E671B24852B00EDBB2F /* AppDelegate.m */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; tabWidth = 2; };
 		821B2E691B24852B00EDBB2F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		821B2E6A1B24852B00EDBB2F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		821B2E6A1B24852B00EDBB2F /* ViewController.m */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; tabWidth = 2; };
 		821B2E6D1B24852B00EDBB2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		821B2E6F1B24852B00EDBB2F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		821B2E721B24852B00EDBB2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		821B2E781B24852B00EDBB2F /* UIDesignLabTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UIDesignLabTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		821B2E7D1B24852B00EDBB2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		821B2E7E1B24852B00EDBB2F /* UIDesignLabTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIDesignLabTests.m; sourceTree = "<group>"; };
+		82F5B6A11B27381B007B258E /* SliderMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderMenuViewController.h; sourceTree = "<group>"; };
+		82F5B6A21B27381B007B258E /* SliderMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = SliderMenuViewController.m; sourceTree = "<group>"; tabWidth = 2; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +107,8 @@
 				821B2E6F1B24852B00EDBB2F /* Images.xcassets */,
 				821B2E711B24852B00EDBB2F /* LaunchScreen.xib */,
 				821B2E621B24852B00EDBB2F /* Supporting Files */,
+				82F5B6A11B27381B007B258E /* SliderMenuViewController.h */,
+				82F5B6A21B27381B007B258E /* SliderMenuViewController.m */,
 			);
 			path = UIDesignLab;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82F5B6A31B27381B007B258E /* SliderMenuViewController.m in Sources */,
 				821B2E6B1B24852B00EDBB2F /* ViewController.m in Sources */,
 				821B2E681B24852B00EDBB2F /* AppDelegate.m in Sources */,
 				821B2E651B24852B00EDBB2F /* main.m in Sources */,

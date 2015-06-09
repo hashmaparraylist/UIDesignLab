@@ -16,12 +16,12 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.demoOne.layer.borderWidth = .5f;
-    self.demoOne.layer.borderColor = [[UIColor blueColor] CGColor];
-    [self.demoOne.layer setCornerRadius:5.0];
-    self.demoOne.layer.masksToBounds = YES;
+  [super viewDidLoad];
+  
+  self.demoOne.layer.borderWidth = .5f;
+  self.demoOne.layer.borderColor = [[UIColor blueColor] CGColor];
+  [self.demoOne.layer setCornerRadius:5.0];
+  self.demoOne.layer.masksToBounds = YES;
 }
 
 - (void)didReceiveMemoryWarning {
