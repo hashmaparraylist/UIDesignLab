@@ -10,4 +10,6 @@
 
 @interface SliderMenuViewController : UIViewController
 
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *menuButton;
+
 @end

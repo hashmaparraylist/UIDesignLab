@@ -24,7 +24,7 @@
                                 <inset key="titleEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                 <state key="normal" title="侧边毛玻璃导航"/>
                                 <connections>
-                                    <segue destination="UFy-iE-Ub1" kind="show" identifier="sliderMenu" id="Mk4-2Y-Shg"/>
+                                    <segue destination="6vL-5R-hjm" kind="show" id="JEs-Ip-HOV"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -41,7 +41,28 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1306" y="438"/>
+            <point key="canvasLocation" x="754" y="764"/>
+        </scene>
+        <!--Reveal View Controller-->
+        <scene sceneID="dHM-XB-BEU">
+            <objects>
+                <viewController id="6vL-5R-hjm" customClass="RevealViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="McS-0p-vQW"/>
+                        <viewControllerLayoutGuide type="bottom" id="dpQ-P3-Jmw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="o8V-2N-ida">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="UFy-iE-Ub1" kind="custom" identifier="menu" id="YeU-rG-AS7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cPR-7B-PdC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1416" y="764"/>
         </scene>
         <!--侧边毛玻璃-->
         <scene sceneID="FWJ-2e-Tot">
@@ -75,6 +96,9 @@
                         <barButtonItem key="leftBarButtonItem" style="done" systemItem="add" id="oDe-tH-GCu"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="stop" id="TWI-7K-z1A"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="menuButton" destination="oDe-tH-GCu" id="ELg-L0-iJ0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OyZ-zA-QE8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -98,6 +122,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KoQ-sW-h46" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2115" y="438"/>
+        </scene>
+        <!--Menu Table View Controller-->
+        <scene sceneID="sdA-xd-8vn">
+            <objects>
+                <tableViewController id="p5D-nz-WP0" customClass="MenuTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="mnu-RQ-2iy">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="S9e-8v-EwO">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S9e-8v-EwO" id="njF-JD-KpX">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="p5D-nz-WP0" id="h5n-Ad-IQJ"/>
+                            <outlet property="delegate" destination="p5D-nz-WP0" id="GpA-f6-p96"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yHT-Up-pAz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2119" y="1132"/>
         </scene>
     </scenes>
 </document>
