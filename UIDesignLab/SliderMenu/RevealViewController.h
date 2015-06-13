@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class SliderMenuViewController;
+@class MenuTableViewController;
+
 @interface RevealViewController : UIViewController
+
+@property (nonatomic, strong) MenuTableViewController *leftController;
+@property (nonatomic, strong) SliderMenuViewController *centerController;
 
 @end

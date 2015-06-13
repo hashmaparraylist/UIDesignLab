@@ -15,6 +15,8 @@
 
 @implementation ViewController
 
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad {
   [super viewDidLoad];
   
@@ -24,9 +26,5 @@
   self.demoOne.layer.masksToBounds = YES;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end
