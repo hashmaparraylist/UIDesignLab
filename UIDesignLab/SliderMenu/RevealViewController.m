@@ -10,7 +10,7 @@
 #import "MenuTableViewController.h"
 #import "SliderMenuViewController.h"
 
-@interface RevealViewController ()
+@interface RevealViewController () <SliderMenuViewControllerDelegate>
 
 @end
 
@@ -23,8 +23,11 @@
   // Do any additional setup after loading the view.
   
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-  self.centerController = (SliderMenuViewController *)[storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+  self.centerController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+  SliderMenuViewController *topViewController = (SliderMenuViewController *) self.centerController.topViewController;
+  topViewController.delegate = self;
   self.leftController = (MenuTableViewController *)[storyboard instantiateViewControllerWithIdentifier:@"LeftViewController"];
+  
   
   [self.view addSubview:self.centerController.view];
   [self.centerController.view setTag:1];
@@ -55,6 +58,9 @@
 
 #pragma mark - IBActions
 
+- (IBAction)closeMenu:(UIStoryboardSegue *)segue {
+}
+
 #pragma mark - Public
 
 #pragma mark - Private
@@ -66,6 +72,7 @@
   layer.shadowOpacity = 1;
   layer.shadowRadius = 20.0;
   
+  CGFloat offset = self.view.frame.size.width * 3 / 4;
   
   if (swipeGesture.direction == UISwipeGestureRecognizerDirectionRight) {
     [self.leftController.view setHidden:NO];
@@ -73,7 +80,7 @@
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
   
     if (self.centerController.view.frame.origin.x == self.view.frame.origin.x) {
-      [self.centerController.view setFrame:CGRectMake(self.centerController.view.frame.origin.x + 100, self.centerController.view.frame.origin.y, self.centerController.view.frame.size.width, self.centerController.view.frame.size.height)];
+      [self.centerController.view setFrame:CGRectMake(self.centerController.view.frame.origin.x + offset, self.centerController.view.frame.origin.y, self.centerController.view.frame.size.width, self.centerController.view.frame.size.height)];
     }
     
     [UIView commitAnimations];
@@ -84,13 +91,19 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     
-    if (self.centerController.view.frame.origin.x == 100) {
-      [self.centerController.view setFrame:CGRectMake(self.centerController.view.frame.origin.x-100, self.centerController.view.frame.origin.y, self.centerController.view.frame.size.width, self.centerController.view.frame.size.height)];
+    if (self.centerController.view.frame.origin.x == offset) {
+      [self.centerController.view setFrame:CGRectMake(self.centerController.view.frame.origin.x - offset, self.centerController.view.frame.origin.y, self.centerController.view.frame.size.width, self.centerController.view.frame.size.height)];
     }
     
     [UIView commitAnimations];
   }
   
+}
+
+#pragma mark - SliderMenuViewControllerDelegate
+
+-(void)closeSliderMenu {
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

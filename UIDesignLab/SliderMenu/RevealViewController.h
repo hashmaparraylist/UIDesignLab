@@ -14,6 +14,6 @@
 @interface RevealViewController : UIViewController
 
 @property (nonatomic, strong) MenuTableViewController *leftController;
-@property (nonatomic, strong) SliderMenuViewController *centerController;
+@property (nonatomic, strong) UINavigationController *centerController;
 
 @end
