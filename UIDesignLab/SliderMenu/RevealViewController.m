@@ -10,6 +10,8 @@
 #import "MenuTableViewController.h"
 #import "SliderMenuViewController.h"
 
+#define OFFSET 60
+
 @interface RevealViewController () <SliderMenuViewControllerDelegate>
 
 @end
@@ -21,34 +23,15 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
+  self.centerNavigationController = (UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+  self.centerController = (SliderMenuViewController *)self.centerNavigationController.topViewController;
+  self.centerController.delegate = self;
   
-  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-  self.centerController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
-  SliderMenuViewController *topViewController = (SliderMenuViewController *) self.centerController.topViewController;
-  topViewController.delegate = self;
-  self.leftController = (MenuTableViewController *)[storyboard instantiateViewControllerWithIdentifier:@"LeftViewController"];
+  [self.view addSubview:self.centerNavigationController.view];
+  [self addChildViewController:self.centerNavigationController];
   
+  [self.centerNavigationController didMoveToParentViewController:self];
   
-  [self.view addSubview:self.centerController.view];
-  [self.centerController.view setTag:1];
-  [self.centerController.view setFrame:self.view.bounds];
-  
-  [self.view addSubview:self.leftController.view];
-  [self.leftController.view setTag:2];
-  [self.leftController.view setFrame:self.view.bounds];
-  
-  [self.view bringSubviewToFront:self.centerController.view];
-  
-  // 添加右移滑动手势
-  UISwipeGestureRecognizer *swipeGestureRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
-  [swipeGestureRight setDirection:UISwipeGestureRecognizerDirectionRight];
-  [self.centerController.view addGestureRecognizer:swipeGestureRight];
-
-  // 添加左移滑动手势
-  UISwipeGestureRecognizer *swipeGestureLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGesture:)];
-  [swipeGestureLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-  [self.centerController.view addGestureRecognizer:swipeGestureLeft];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,52 +41,58 @@
 
 #pragma mark - IBActions
 
-- (IBAction)closeMenu:(UIStoryboardSegue *)segue {
-}
-
 #pragma mark - Public
 
 #pragma mark - Private
 
--(void)swipeGesture:(UISwipeGestureRecognizer *)swipeGesture {
-  CALayer *layer = [self.centerController.view layer];
-  layer.shadowColor = [[UIColor blackColor] CGColor];
-  layer.shadowOffset = CGSizeMake(1, 1);
-  layer.shadowOpacity = 1;
-  layer.shadowRadius = 20.0;
-  
-  CGFloat offset = self.view.frame.size.width * 3 / 4;
-  
-  if (swipeGesture.direction == UISwipeGestureRecognizerDirectionRight) {
-    [self.leftController.view setHidden:NO];
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-  
-    if (self.centerController.view.frame.origin.x == self.view.frame.origin.x) {
-      [self.centerController.view setFrame:CGRectMake(self.centerController.view.frame.origin.x + offset, self.centerController.view.frame.origin.y, self.centerController.view.frame.size.width, self.centerController.view.frame.size.height)];
-    }
-    
-    [UIView commitAnimations];
-  }
-  
-  if (swipeGesture.direction == UISwipeGestureRecognizerDirectionLeft) {
-    [self.leftController.view setHidden:YES];
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-    
-    if (self.centerController.view.frame.origin.x == offset) {
-      [self.centerController.view setFrame:CGRectMake(self.centerController.view.frame.origin.x - offset, self.centerController.view.frame.origin.y, self.centerController.view.frame.size.width, self.centerController.view.frame.size.height)];
-    }
-    
-    [UIView commitAnimations];
-  }
-  
+- (void)addChildSidePannelController:(MenuTableViewController *) sidePannelController {
+  [self.view insertSubview:sidePannelController.view atIndex:0];
+  [self addChildViewController:sidePannelController];
+  [sidePannelController didMoveToParentViewController:self];
+}
+
+- (void) animateCenterPannelXPostion:(CGFloat) targetPostion completion:(void (^)(BOOL finished)) completion {
+  [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//    self.centerNavigationController.view.frame.origin
+    CGRect frame = self.centerNavigationController.view.frame;
+    frame.origin.x = targetPostion;
+    [self.centerNavigationController.view setFrame:frame];
+  } completion:completion];
+}
+
+- (BOOL) isLeftMenuAlreadyExpanded {
+  return (self.centerNavigationController.view.frame.origin.x != 0);
 }
 
 #pragma mark - SliderMenuViewControllerDelegate
 
--(void)closeSliderMenu {
+-(void)closeViewController {
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)toggleLeftMenu {
+  BOOL notAlreadyExpanded = ![self isLeftMenuAlreadyExpanded];
+  if (notAlreadyExpanded) {
+    [self addLeftMenuViewController];
+  }
+  [self animatedLeftMenu:notAlreadyExpanded];
+}
+
+- (void)addLeftMenuViewController {
+  if (self.leftController == nil) {
+    self.leftController = (MenuTableViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"LeftViewController"];
+    [self addChildSidePannelController:self.leftController];
+  }
+}
+
+- (void)animatedLeftMenu:(BOOL)shouldExpand {
+  if (shouldExpand) {
+    [self animateCenterPannelXPostion:CGRectGetWidth(self.centerNavigationController.view.frame) - OFFSET completion:nil];
+  } else {
+    [self animateCenterPannelXPostion:0 completion:^(BOOL finished) {
+      [self.leftController.view removeFromSuperview];
+      self.leftController = nil;
+    }];
+  }
+}
 @end

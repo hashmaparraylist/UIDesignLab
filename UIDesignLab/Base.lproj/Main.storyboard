@@ -90,7 +90,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="侧边毛玻璃" id="Nnz-Gn-pVW">
-                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="add" id="oDe-tH-GCu"/>
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="add" id="oDe-tH-GCu">
+                            <connections>
+                                <action selector="toggleMenu:" destination="QNd-ii-ywb" id="yDi-ZV-wlV"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="stop" id="TWI-7K-z1A"/>
                     </navigationItem>
                     <connections>
