@@ -12,7 +12,7 @@
 
 #define OFFSET 60
 
-@interface RevealViewController () <SliderMenuViewControllerDelegate>
+@interface RevealViewController () <SliderMenuViewControllerDelegate, UIGestureRecognizerDelegate>
 
 @end
 
@@ -22,7 +22,8 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  // Do any additional setup after loading the view.
+  
+  // 添加主画面
   self.centerNavigationController = (UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
   self.centerController = (SliderMenuViewController *)self.centerNavigationController.topViewController;
   self.centerController.delegate = self;
@@ -32,11 +33,24 @@
   
   [self.centerNavigationController didMoveToParentViewController:self];
   
+  self.currentState = BothCollapsed;
+  
+  // 添加手势
+  UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+  [self.centerNavigationController.view addGestureRecognizer:panGesture];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Custom Accessors
+
+-(void)setCurrentState:(SlideOutState)currentState {
+  _currentState = currentState;
+  BOOL shouldShowShadow = (self.currentState != BothCollapsed);
+  [self showShadowForCenterViewController:shouldShowShadow];
 }
 
 #pragma mark - IBActions
@@ -60,9 +74,39 @@
   } completion:completion];
 }
 
-- (BOOL) isLeftMenuAlreadyExpanded {
-  return (self.centerNavigationController.view.frame.origin.x != 0);
+- (void)showShadowForCenterViewController:(BOOL)shouldShowShadow {
+  if (shouldShowShadow) {
+    self.centerNavigationController.view.layer.shadowOpacity = 0.8;
+  } else {
+    self.centerNavigationController.view.layer.shadowOpacity = 0;
+  }
 }
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer {
+  BOOL gestureIsDraggingFromLeftToRight = ([recognizer velocityInView:self.view].x > 0);
+  if (recognizer.state == UIGestureRecognizerStateBegan) {
+    if (self.currentState == BothCollapsed) {
+      if (gestureIsDraggingFromLeftToRight) {
+        [self addLeftMenuViewController];
+      }
+      
+      [self showShadowForCenterViewController:YES];
+    }
+  } else if (recognizer.state == UIGestureRecognizerStateChanged) {
+    CGPoint center = recognizer.view.center;
+    center.x = center.x + [recognizer translationInView:self.view].x;
+    recognizer.view.center = center;
+    [recognizer setTranslation:CGPointZero inView:self.view];
+  } else if (recognizer.state == UIGestureRecognizerStateEnded) {
+    if (self.leftController != nil) {
+      BOOL hasMovedGreaterThanHalfway = recognizer.view.center.x > recognizer.view.bounds.size.width;
+      [self animatedLeftMenu:hasMovedGreaterThanHalfway];
+    }
+  }
+}
+
 
 #pragma mark - SliderMenuViewControllerDelegate
 
@@ -71,7 +115,7 @@
 }
 
 - (void)toggleLeftMenu {
-  BOOL notAlreadyExpanded = ![self isLeftMenuAlreadyExpanded];
+  BOOL notAlreadyExpanded = (self.currentState != LeftPanelExpanded);
   if (notAlreadyExpanded) {
     [self addLeftMenuViewController];
   }
@@ -87,9 +131,11 @@
 
 - (void)animatedLeftMenu:(BOOL)shouldExpand {
   if (shouldExpand) {
+    self.currentState = LeftPanelExpanded;
     [self animateCenterPannelXPostion:CGRectGetWidth(self.centerNavigationController.view.frame) - OFFSET completion:nil];
   } else {
     [self animateCenterPannelXPostion:0 completion:^(BOOL finished) {
+      self.currentState = BothCollapsed;
       [self.leftController.view removeFromSuperview];
       self.leftController = nil;
     }];

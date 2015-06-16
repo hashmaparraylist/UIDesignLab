@@ -21,5 +21,4 @@
 
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *menuButton;
 @property (nonatomic, weak) NSObject<SliderMenuViewControllerDelegate> *delegate;
-
 @end

@@ -11,10 +11,17 @@
 @class SliderMenuViewController;
 @class MenuTableViewController;
 
+typedef NS_ENUM(NSInteger, SlideOutState) {
+  BothCollapsed,
+  LeftPanelExpanded,
+  RightPanelExpanded,
+};
+
 @interface RevealViewController : UIViewController
 
 @property (nonatomic, strong) MenuTableViewController *leftController;
 @property (nonatomic, strong) SliderMenuViewController *centerController;
 @property (nonatomic, strong) UINavigationController *centerNavigationController;
+@property (nonatomic, assign) SlideOutState currentState;
 
 @end
